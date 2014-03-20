@@ -38,4 +38,13 @@ class JorudanSearch
     routes
   end
 
+  def route_home
+    text = ""
+    text += routes("六本木一丁目", "ひばりヶ丘（東京）", "", 300)[0].time
+    text += "\n"
+    text += routes("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300)[0].time
+    text += "\n"
+    text += routes("神谷町", "ひばりヶ丘（東京）", "", 300)[0].time
+  end
+
 end
