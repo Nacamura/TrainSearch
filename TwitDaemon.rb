@@ -36,5 +36,3 @@ class TwitDaemon
   end
 
 end
-
-TwitDaemon.new.execute
