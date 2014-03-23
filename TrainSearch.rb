@@ -9,7 +9,7 @@ class TrainSearch
     text = "acception\n"
     @jorudan ||= JorudanSearch.new
     text += @jorudan.route_home
-    twitcom.update(text)
+    twitcom.create_direct_message(text)
     text
   end
 

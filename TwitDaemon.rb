@@ -11,10 +11,10 @@ class TwitDaemon
 
   def execute
     @twitcom ||= TwitCommunicator.new( MyJSON.load_json("settings.txt") )
-    tweets = @twitcom.gather_new_tweets
-    tweets.each do |t|
+    dms = @twitcom.gather_new_direct_messages
+    dms.each do |dm|
       lines = []
-      t.text.lines do |l|
+      dm.text.lines do |l|
         lines << l
       end
       if(lines[0].strip != "connective pi")

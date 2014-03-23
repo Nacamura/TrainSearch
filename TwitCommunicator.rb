@@ -21,6 +21,14 @@ class TwitCommunicator
 		tweets
 	end
 
+	def gather_new_direct_messages
+		dms = Twitter.direct_messages
+	end
+
+	def create_direct_message(text)
+		Twitter.direct_message_create(@target_user, text)
+	end
+
 	def update(text)
 		Twitter.update(text)
 	end
