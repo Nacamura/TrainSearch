@@ -6,10 +6,12 @@ load './TrainSearch.rb'
 class TwitDaemon
   include MyLogger
 
+  @enabled
   @twitcom
   @trainsearch
 
-  def execute
+  def call
+    return if not @enabled
     @twitcom ||= TwitCommunicator.new( MyJSON.load_json("settings.txt") )
     dms = @twitcom.gather_new_direct_messages
     dms.each do |dm|
@@ -33,6 +35,14 @@ class TwitDaemon
         @trainsearch.route_home(@twitcom)
       end
     end
+  end
+
+  def enable
+    @enabled = true
+  end
+
+  def disable
+    @enabled = false
   end
 
 end
