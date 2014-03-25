@@ -1,7 +1,7 @@
-load './MyJSON.rb'
-load './MyLogger.rb'
-load './TwitCommunicator.rb'
-load './TrainSearch.rb'
+load './TrainSearch/MyJSON.rb'
+load './TrainSearch/MyLogger.rb'
+load './TrainSearch/TwitCommunicator.rb'
+load './TrainSearch/TrainSearch.rb'
 
 class TwitDaemon
   include MyLogger
@@ -12,7 +12,7 @@ class TwitDaemon
 
   def call
     return if not @enabled
-    @twitcom ||= TwitCommunicator.new( MyJSON.load_json("settings.txt") )
+    @twitcom ||= TwitCommunicator.new( MyJSON.load_json("./TrainSearch/settings.txt") )
     dms = @twitcom.gather_new_direct_messages
     dms.each do |dm|
       lines = []
