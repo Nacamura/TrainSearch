@@ -19,7 +19,7 @@ class TwitDaemon
       dm.text.lines do |l|
         lines << l
       end
-      if(lines[0].strip != "connective pi")
+      if(lines[0].strip != "pi")
         next
       else
         parse_command(lines)
