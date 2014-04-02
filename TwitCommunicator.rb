@@ -10,15 +10,7 @@ class TwitCommunicator
 			config.oauth_token = settings["access_token"]
 			config.oauth_token_secret = settings["access_token_secret"]
 		end
-		@target_user = settings["target_user"]
-		@count = settings["count"]
-		@since_id = settings["since_id"]
-	end
-
-	def gather_new_tweets
-		tweets = Twitter.user_timeline(@target_user, options={:count=>@count, :since_id=>@since_id})
-		@since_id = tweets[0].id
-		tweets
+		@target_user = settings["myself"]
 	end
 
 	def gather_new_direct_messages

@@ -1,4 +1,4 @@
-load './TrainSearch/JorudanSearch.rb'
+load 'JorudanSearch.rb'
 
 class TrainSearch
   include MyLogger
