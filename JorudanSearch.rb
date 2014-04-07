@@ -7,6 +7,20 @@ class JorudanSearch
     parse_to_routes(get_mechanize_res(from_st, to_st, route_st, gap_seconds))
   end
 
+  def routes_specific(from_st, to_st, route_st, gap_seconds)
+    routes(from_st, to_st, route_st, gap_seconds) << get_specific_route(from_st, to_st, route_st, gap_seconds)
+  end
+
+  def get_specific_route(from_st, to_st, route_st, gap_seconds)
+    route_stations = []
+    get_mechanize_res(from_st, to_st, route_st, gap_seconds).search("td").each do |td|
+      next if (td.attributes["class"].nil?) || (td.attributes["class"].value != "nm")
+      route_stations << td.text
+      break if td.text == to_st
+    end
+    route_stations
+  end
+
   def get_mechanize_res(from_st, to_st, route_st, gap_seconds)
     agent = Mechanize.new
     agent.user_agent_alias = 'Mac Safari'
@@ -39,12 +53,12 @@ class JorudanSearch
   end
 
   def route_home
-    text = ""
-    text += routes("六本木一丁目", "ひばりヶ丘（東京）", "", 300)[0].time
-    text += "\n"
-    text += routes("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300)[0].time
-    text += "\n"
-    text += routes("神谷町", "ひばりヶ丘（東京）", "", 300)[0].time
+    r = routes_specific("六本木一丁目", "ひばりヶ丘（東京）", "小竹向原", 300)
+    result = r[0].time
+    r[-1].each do |station|
+      result += ("," + station)
+    end
+    result
   end
 
 end
