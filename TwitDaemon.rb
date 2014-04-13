@@ -2,6 +2,7 @@ load 'MyJSON.rb'
 load 'MyLogger.rb'
 load 'TwitCommunicator.rb'
 load 'TrainSearch.rb'
+load 'Radio.rb'
 
 class TwitDaemon
   include MyLogger
@@ -27,10 +28,12 @@ class TwitDaemon
 
   def parse_command(lines)
     lines.each do |l|
-      case l
+      case l.strip
       when "home"
         @trainsearch ||= TrainSearch.new
         @trainsearch.route_home(@twitcom)
+      when "radio"
+        Radio.temp_schedule(lines)
       end
     end
   end
