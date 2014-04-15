@@ -5,11 +5,9 @@ class TrainSearch
 
   @jorudan
 
-  def route_home(twitcom)
+  def route_home
     @jorudan ||= JorudanSearch.new
-    text = @jorudan.route_home
-    twitcom.create_direct_message(text)
-    text
+    @jorudan.route_home
   end
 
 end
